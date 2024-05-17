@@ -5,14 +5,19 @@ jobs:
     name: Build
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
       with:
         submodules: true
-    - uses: lukka/run-vcpkg@v11
-    - uses: microsoft/setup-msbuild@v1
+    - name: Setup vcpkg
+      uses: lukka/run-vcpkg@v11
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
+    - name: Integrate vcpkg
+      run: vcpkg integrate install
     - name: Build SteelYourself
       run: msbuild ./SteelYourself/SteelYourself.vcxproj /p:Configuration=Release /p:Platform=x64
-    - name: Upload
+    - name: Upload SteelYourself
       uses: actions/upload-artifact@v2
       with:
         name: SteelYourself
