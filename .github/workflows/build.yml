@@ -1,0 +1,17 @@
+on: [push, pull_request]
+
+jobs:
+  build:
+    name: Build
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: lukka/run-vcpkg@v11
+    - uses: microsoft/setup-msbuild@v1
+    - name: Build SteelYourself
+      run: msbuild ./SteelYourself/SteelYourself.vcxproj /p:Configuration=Release /p:Platform=x64
+    - name: Upload
+      uses: actions/upload-artifact@v2
+      with:
+        name: SteelYourself
+        path: ./SteelYourself/x64/Release/SteelYourself.exe
