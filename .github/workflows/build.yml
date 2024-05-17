@@ -21,4 +21,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: SteelYourself
-        path: ./SteelYourself/x64/Release/SteelYourself.exe
+        path: ./SteelYourself/x64/Release/SteelYourself.dll
