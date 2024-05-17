@@ -9,3 +9,7 @@ To install, download the [Aurie Manager](https://github.com/AurieFramework/Aurie
 ## SteelYourself
 
 Force encounters to be the same one over and over again. Create an `encounter.txt` next to the game .exe with the name of the encounter in it (e.g. `enc_rabbit_queen0`). Reference `SteelYourself/encounters.txt` for a list of encounters.
+
+## TextureSwapper
+
+Swap textures in data.win. Create `mods/TextureSwapper/id.png` where `id` is the index in the data.win file (e.g. 24). Not heavily tested!

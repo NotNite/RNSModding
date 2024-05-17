@@ -15,6 +15,7 @@ jobs:
       uses: microsoft/setup-msbuild@v1
     - name: Integrate vcpkg
       run: vcpkg integrate install
+
     - name: Build SteelYourself
       run: msbuild ./SteelYourself/SteelYourself.vcxproj /p:Configuration=Release /p:Platform=x64
     - name: Upload SteelYourself
@@ -22,3 +23,11 @@ jobs:
       with:
         name: SteelYourself
         path: ./SteelYourself/x64/Release/SteelYourself.dll
+
+    - name: Build TextureSwapper
+      run: msbuild ./TextureSwapper/TextureSwapper.vcxproj /p:Configuration=Release /p:Platform=x64
+    - name: Upload TextureSwapper
+      uses: actions/upload-artifact@v2
+      with:
+        name: TextureSwapper
+        path: ./TextureSwapper/x64/Release/TextureSwapper.dll
