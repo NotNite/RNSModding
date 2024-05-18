@@ -22,6 +22,7 @@ When playing with a mod that changes gameplay significantly, multiplayer will on
 The following mods restrict online play:
 
 - SteelYourself
+- PermanentWinds
 
 ## Mods
 
@@ -32,3 +33,9 @@ Force encounters to be the same one over and over again. Create an `encounter.tx
 ### TextureSwapper
 
 Swap textures in data.win. Create `mods/TextureSwapper/id.png` where `id` is the index in the data.win file (e.g. 24). Not heavily tested!
+
+### PermanentWinds
+
+I heard you liked turbulent winds... 
+
+Enables turbulent winds all the time in all fights. Good luck!
