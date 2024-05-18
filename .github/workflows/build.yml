@@ -29,3 +29,11 @@ jobs:
       with:
         name: TextureSwapper
         path: ./TextureSwapper/x64/Release/TextureSwapper.dll
+           
+    - name: Build PermanentWinds
+      run: msbuild ./PermanentWinds/PermanentWinds.vcxproj /p:Configuration=Release /p:Platform=x64
+    - name: Upload PermanentWinds
+      uses: actions/upload-artifact@v2
+      with:
+        name: PermanentWinds
+        path: ./PermanentWinds/x64/Release/PermanentWinds.dll
