@@ -13,8 +13,6 @@ jobs:
       uses: lukka/run-vcpkg@v11
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1
-    - name: Integrate vcpkg
-      run: vcpkg integrate install
 
     - name: Build SteelYourself
       run: msbuild ./SteelYourself/SteelYourself.vcxproj /p:Configuration=Release /p:Platform=x64
