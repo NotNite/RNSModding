@@ -43,6 +43,6 @@ jobs:
     - name: Upload PlayerColorChanger
       uses: actions/upload-artifact@v2
       with:
-        name: PermanentWinds
+        name: PlayerColorChanger
         path: ./PlayerColorChanger/x64/Release/PlayerColorChanger.dll
 
