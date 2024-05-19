@@ -20,9 +20,9 @@
     </ItemGroup>
     <PropertyGroup Label="Globals">
         <VCProjectVersion>15.0</VCProjectVersion>
-        <ProjectGuid>{4DDD5EF0-A57C-416C-B9C2-19C62BC76D6E}</ProjectGuid>
+        <ProjectGuid>{2F015E4E-9D11-431C-8979-CD62AF089DAC}</ProjectGuid>
         <Keyword>Win32Proj</Keyword>
-        <RootNamespace>SteelYourself</RootNamespace>
+        <RootNamespace>ImGuiWrapper</RootNamespace>
         <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     </PropertyGroup>
     <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props"/>
@@ -159,12 +159,11 @@
     </ItemDefinitionGroup>
     <ItemGroup>
         <ClCompile Include="dllmain.cpp"/>
+        <ClCompile Include="ImGuiWrapper.cpp" />
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\ImGuiWrapper\ImGuiWrapper.vcxproj">
-        <Project>{2f015e4e-9d11-431c-8979-cd62af089dac}</Project>
-        <Name>ImGuiWrapper</Name>
-      </ProjectReference>
+      <ClInclude Include="ImGuiWrapper.h" />
+      <ClInclude Include="ImGuiWrapperInterface.h" />
     </ItemGroup>
     <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
     <ImportGroup Label="ExtensionTargets">

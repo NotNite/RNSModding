@@ -3,15 +3,22 @@
 #include <YYToolkit/Shared.cpp>  // NOLINT(bugprone-suspicious-include) lmao
 #include <fstream>
 
+#define CIMGUI_API __declspec(dllimport)
+#include "cimgui.h"
+#include "ImGuiWrapperInterface.h"
+
 using namespace Aurie;
 using namespace YYTK;
 
 typedef RValue& ScriptFunction(CInstance* self, CInstance* other, RValue& return_value,
-                                 int num_args, RValue** args);
+                               int num_args, RValue** args);
 
 static AurieModule* g_module = nullptr;
 static YYTKInterface* g_module_interface = nullptr;
 static ScriptFunction* scrdt_encounter_original = nullptr;
+
+// God I hate cimgui
+static char encounter_raw[256] = {0};
 
 RValue& scrdt_encounter(YYTK::CInstance* self, CInstance* other, RValue& return_value,
                         int num_args, RValue** args)
@@ -21,28 +28,25 @@ RValue& scrdt_encounter(YYTK::CInstance* self, CInstance* other, RValue& return_
         auto str = args[0]->AsString();
         g_module_interface->Print(CM_GRAY, "Starting encounter with %s", str.data());
 
-        auto module = GetModuleHandle(nullptr);
-        WCHAR path[MAX_PATH];
-        GetModuleFileNameW(module, path, MAX_PATH);
-
-        auto dir = fs::path(path).parent_path();
-        auto encounter_path = dir / "encounter.txt";
-
-        std::ifstream file(encounter_path);
-        if (!file.bad())
+        auto encounter = std::string(encounter_raw);
+        if (!encounter.empty())
         {
-            auto encounter = std::string{};
-            std::getline(file, encounter);
-            if (!encounter.empty())
-            {
-                g_module_interface->Print(CM_GRAY, "Redirecting encounter to %s", encounter.c_str());
-                g_module_interface->GetRunnerInterface().YYCreateString(args[0], encounter.c_str());
-            }
+            g_module_interface->Print(CM_GRAY, "Redirecting encounter to %s", encounter.c_str());
+            g_module_interface->GetRunnerInterface().YYCreateString(args[0], encounter.c_str());
         }
     }
 
     return_value = scrdt_encounter_original(self, other, return_value, num_args, args);
     return return_value;
+}
+
+void draw()
+{
+    if (ImGui_Begin("SteelYourself", nullptr, ImGuiWindowFlags_AlwaysAutoResize))
+    {
+        ImGui_InputText("Encounter", encounter_raw, sizeof(encounter_raw), ImGuiInputTextFlags_None);
+    }
+    ImGui_End();
 }
 
 EXPORTED AurieStatus ModuleInitialize(
@@ -83,6 +87,16 @@ EXPORTED AurieStatus ModuleInitialize(
     );
     if (!AurieSuccess(status)) return AURIE_MODULE_DEPENDENCY_NOT_RESOLVED;
     scrdt_encounter_original = static_cast<ScriptFunction*>(orig);
+
+    ImGuiWrapperInterface* imgui_wrapper = nullptr;
+    ObGetInterface(
+        "ImGuiWrapper",
+        reinterpret_cast<AurieInterfaceBase*&>(imgui_wrapper)
+    );
+    if (imgui_wrapper != nullptr)
+    {
+        imgui_wrapper->RegisterDrawCallback(draw);
+    }
 
     return AURIE_SUCCESS;
 }

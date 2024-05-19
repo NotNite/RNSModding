@@ -26,7 +26,13 @@ The following mods restrict online play:
 
 ## Mods
 
+### ImGuiWrapper
+
+Handles the overlay UI for other mods. Press Insert to toggle the UI.
+
 ### SteelYourself
+
+**Requires ImGuiWrapper.**
 
 Force encounters to be the same one over and over again. Create an `encounter.txt` next to the game .exe with the name of the encounter in it (e.g. `enc_rabbit_queen0`). Reference `SteelYourself/encounters.txt` for a list of encounters.
 
@@ -36,6 +42,6 @@ Swap textures in data.win. Create `mods/TextureSwapper/id.png` where `id` is the
 
 ### PermanentWinds
 
-I heard you liked turbulent winds... 
+I heard you liked turbulent winds...
 
 Enables turbulent winds all the time in all fights. Good luck!
