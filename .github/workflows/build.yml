@@ -14,6 +14,14 @@ jobs:
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1
 
+    - name: Build ImGuiWrapper
+      run: msbuild ./ImGuiWrapper/ImGuiWrapper.vcxproj /p:Configuration=Release /p:Platform=x64
+    - name: Upload ImGuiWrapper
+      uses: actions/upload-artifact@v2
+      with:
+        name: ImGuiWrapper
+        path: ./ImGuiWrapper/x64/Release/ImGuiWrapper.dll
+
     - name: Build SteelYourself
       run: msbuild ./SteelYourself/SteelYourself.vcxproj /p:Configuration=Release /p:Platform=x64
     - name: Upload SteelYourself
