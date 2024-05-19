@@ -36,6 +36,10 @@ Swap textures in data.win. Create `mods/TextureSwapper/id.png` where `id` is the
 
 ### PermanentWinds
 
-I heard you liked turbulent winds... 
+I heard you liked turbulent winds...
 
 Enables turbulent winds all the time in all fights. Good luck!
+
+## PlayerColorChanger
+
+Changes the local player color to a custom one. Create a `player_color.txt` with the hex color in it without the hash (e.g. `CB2027`).

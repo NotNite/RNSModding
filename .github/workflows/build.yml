@@ -29,7 +29,7 @@ jobs:
       with:
         name: TextureSwapper
         path: ./TextureSwapper/x64/Release/TextureSwapper.dll
-           
+
     - name: Build PermanentWinds
       run: msbuild ./PermanentWinds/PermanentWinds.vcxproj /p:Configuration=Release /p:Platform=x64
     - name: Upload PermanentWinds
@@ -37,3 +37,12 @@ jobs:
       with:
         name: PermanentWinds
         path: ./PermanentWinds/x64/Release/PermanentWinds.dll
+
+    - name: Build PlayerColorChanger
+      run: msbuild ./PlayerColorChanger/PlayerColorChanger.vcxproj /p:Configuration=Release /p:Platform=x64
+    - name: Upload PlayerColorChanger
+      uses: actions/upload-artifact@v2
+      with:
+        name: PermanentWinds
+        path: ./PlayerColorChanger/x64/Release/PlayerColorChanger.dll
+
