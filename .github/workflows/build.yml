@@ -46,3 +46,10 @@ jobs:
         name: PlayerColorChanger
         path: ./PlayerColorChanger/x64/Release/PlayerColorChanger.dll
 
+    - name: Build DebugMenuEnabler
+      run: msbuild ./DebugMenuEnabler/DebugMenuEnabler.vcxproj /p:Configuration=Release /p:Platform=x64
+    - name: Upload DebugMenuEnabler
+      uses: actions/upload-artifact@v2
+      with:
+        name: DebugMenuEnabler
+        path: ./DebugMenuEnabler/x64/Release/DebugMenuEnabler.dll

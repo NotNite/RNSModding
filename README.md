@@ -23,6 +23,7 @@ The following mods restrict online play:
 
 - SteelYourself
 - PermanentWinds
+- DebugMenuEnabler
 
 ## Mods
 
@@ -42,4 +43,16 @@ Enables turbulent winds all the time in all fights. Good luck!
 
 ### PlayerColorChanger
 
-Changes the local player color to a custom one. Create a `player_color.txt` with the hex color in it without the hash (e.g. `CB2027`).
+Changes the local player color to a custom one. Create a `player_color.txt` next to the game .exe with the hex color in it without the hash (e.g. `CB2027`).
+
+### DebugMenuEnabler
+
+Enables the sekrit debug menus. Create a `debug.txt` next to the game .exe, entering one of the following to enable each menu, one per line.
+
+- `upgrade`: Shop upgrades
+- `enc`: Encounters
+- `dialog`: Small talk
+- `stat`: Change health, etc.
+- `item`: Loot drops
+
+**Some hotkeys do things like DELETE YOUR SAVE PROGRESS. You have been warned.**
