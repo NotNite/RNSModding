@@ -46,3 +46,10 @@ jobs:
         name: PlayerColorChanger
         path: ./PlayerColorChanger/x64/Release/PlayerColorChanger.dll
 
+    - name: Build Hardcore
+      run: msbuild ./Hardcore/Hardcore.vcxproj /p:Configuration=Release /p:Platform=x64
+    - name: Upload Hardcore
+      uses: actions/upload-artifact@v2
+      with:
+        name: Hardcore
+        path: ./Hardcore/x64/Release/Hardcore.dll

@@ -23,6 +23,7 @@ The following mods restrict online play:
 
 - SteelYourself
 - PermanentWinds
+- Hardcore
 
 ## Mods
 
@@ -43,3 +44,9 @@ Enables turbulent winds all the time in all fights. Good luck!
 ### PlayerColorChanger
 
 Changes the local player color to a custom one. Create a `player_color.txt` with the hex color in it without the hash (e.g. `CB2027`).
+
+### Hardcore
+
+Work in progress, see https://github.com/NotNite/RNSModding/issues/1
+Makes things harder. All fights now last until enrage, and abilities/loot won't give you invulnerability (only iframes from taking damage).  
+Normal/cute mode does not have enrage. I do not recommend using this mod on normal/cute mode runs.
