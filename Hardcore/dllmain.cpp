@@ -56,7 +56,26 @@ struct StringLiteral {
 	char value[N];
 };
 
+double get_enemy_hp(double id) {
+	CInstance* instance;
+	RValue* player_list;
+	RValue* enemy_list;
+	RValue* enemy;
+	RValue* hp;
+
+	g_yytk_interface->GetGlobalInstance(&instance);
+	g_yytk_interface->GetInstanceMember(instance, "player", player_list);
+	g_yytk_interface->GetArrayEntry(*player_list, 1, enemy_list);
+	g_yytk_interface->GetArrayEntry(*enemy_list, id, enemy);
+	g_yytk_interface->GetInstanceMember(*enemy, "displayHp", hp);
+	return hp->m_Real;
+}
+
 template<StringLiteral name> RValue& zero_dmg(CInstance* self, CInstance* other, RValue& return_value, int num_args, RValue** args) {
+	double enemy_hp = get_enemy_hp(args[1]->m_Real);
+	if (args[2]->m_Real > enemy_hp - 1) {
+		args[2]->m_Real = enemy_hp - 1;
+	}
 	return_value = orig_funcs[name.value](self, other, return_value, num_args, args);
 	return return_value;
 }
@@ -69,8 +88,20 @@ void setup_hooks(FWFrame&) {
 	if (online_version->m_Real <= 10000) { online_version->m_Real += 10000; }
 
 	g_yytk_interface->PrintInfo("Hardcore Mode Enabled");
-	hook_function("nothing", zero_dmg<"nothing">);
 
+	// Zero out damage when an enemy is close to dying.
+	hook_function("gml_Script_scr_pattern_deal_damage_enemy_subtract", zero_dmg<"gml_Script_scr_pattern_deal_damage_enemy_subtract">);
+
+	// TODO: check this interacts properly with DOTs
+	// 
+	// TODO: allow damage when enrage starts
+	// - Check for bp_enrage calls (hopefulllllly works with bosses)
+	// - Reset a flag on new encounter: scr_enemy_add_pattern or scrbp_phase_pattern_remove
+	// TODO: make this work with matti mice (need some flag when they get summoned, remove it at end of fight)
+	// TODO: make this work with shira (investigation needed for shira defense required move/patterns in general)
+	
+	// TODO (long term): Disable iFrames except from taking damage
+	// - Look into wolf boss time slow code for hints
 	g_yytk_interface->RemoveCallback(g_module, setup_hooks);
 }
 
