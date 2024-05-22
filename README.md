@@ -1,5 +1,7 @@
 # RNSModding
 
+**This repository has moved to [RNSReloaded](https://github.com/NotNite/RNSReloaded).**
+
 [![.github/workflows/build.yml](https://github.com/NotNite/RNSModding/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/NotNite/RNSModding/actions/workflows/build.yml)
 
 Collection of mods for Rabbit and Steel.
